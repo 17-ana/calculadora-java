@@ -1,23 +1,29 @@
 name: Java CI con pruebas
+
 on:
-push:
-branches: [ &quot;main&quot; ]
-pull_request:
-branches: [ &quot;main&quot; ]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
-build-and-test:
-runs-on: ubuntu-latest
-steps:
-- name: Clonar repositorio
-uses: actions/checkout@v3
-- name: Instalar Java
-uses: actions/setup-java@v3
-with:
-java-version: &#39;17&#39;
-distribution: &#39;temurin&#39;
-- name: Compilar código
-run: javac -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar src/Calculadora.java
-test/CalculadoraTest.java
-- name: Ejecutar pruebas
-run: java -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar
-org.junit.runner.JUnitCore CalculadoraTest
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar repositorio
+      uses: actions/checkout@v3
+
+    - name: Instalar Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Compilar código
+      run: |
+        javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar src/Calculadora.java test/CalculadoraTest.java
+
+    - name: Ejecutar pruebas
+      run: |
+        java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore CalculadoraTest
