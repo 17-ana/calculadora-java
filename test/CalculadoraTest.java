@@ -13,9 +13,10 @@ public class CalculadoraTest {
     }
     
     // Pruebas unitarias básicas
+    // Cambia un test para que falle
     @Test
-    public void testSumar() {
-        assertEquals(9.0, calc.sumar(4, 5), 0.001);
+    public void testSuma() {
+        assertEquals(5, Calculadora.suma(2, 2)); // Esto fallará porque 2+2=4, no 5
     }
     
     @Test
@@ -42,6 +43,8 @@ public class CalculadoraTest {
     }
     
     // PRUEBAS DE RENDIMIENTO
+    
+    // Prueba de estabilidad
     @Test
     public void testRendimientoSuma() {
         long startTime = System.nanoTime();
