@@ -17,3 +17,9 @@ Este proyecto incluye un pipeline de integración continua que se ejecuta en Git
 - Informa si las pruebas pasan o fallan
 
 Puedes ver los resultados en la pestaña "Actions" del repositorio.
+
+## Notificaciones de fallos
+
+Este pipeline incluye una integración con Slack. Si las pruebas fallan, se envía automáticamente un mensaje al canal #devops-alertas con el estado del pipeline.
+
+La URL del webhook está protegida como secreto en GitHub.
