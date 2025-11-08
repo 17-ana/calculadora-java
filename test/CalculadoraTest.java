@@ -16,7 +16,7 @@ public class CalculadoraTest {
     // Cambia un test para que falle
     @Test
     public void testSuma() {
-        assertEquals(5, Calculadora.suma(2, 2)); // Esto fallará porque 2+2=4, no 5
+        assertEquals(4, Calculadora.suma(2, 2)); // 2+2=4 ✓
     }
     
     @Test

@@ -1,0 +1,11 @@
+{
+  "name": "Calculadora Java",
+  "description": "Una calculadora simple en Java",
+  "repository": "https://github.com/17-ana/calculadora-java",
+  "keywords": ["java", "calculadora"],
+  "buildpacks": [
+    {
+      "url": "heroku/java"
+    }
+  ]
+}
