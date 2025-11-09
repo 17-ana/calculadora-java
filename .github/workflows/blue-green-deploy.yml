@@ -1,0 +1,42 @@
+name: Blue-Green Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy-to-green:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build application
+      run: |
+        mkdir -p target/classes
+        javac -cp "lib/*" -d target/classes src/*.java
+    
+    - name: Install Railway CLI
+      run: npm install -g @railway/cli
+    
+    - name: Deploy to Green Project
+      run: railway deploy
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_GREEN }}
+
+  deploy-to-blue:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build application
+      run: |
+        mkdir -p target/classes
+        javac -cp "lib/*" -d target/classes src/*.java
+    
+    - name: Install Railway CLI
+      run: npm install -g @railway/cli
+    
+    - name: Deploy to Blue Project
+      run: railway deploy
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_BLUE }}
