@@ -1,4 +1,4 @@
-echo '[build]
+[build]
 builder = "nixpacks"
 buildCommand = "mkdir -p target/classes && javac -cp \"lib/*\" -d target/classes src/*.java"
 
@@ -9,4 +9,3 @@ numReplicas = 1
 [[services]]
 name = "web"
 run = "java -cp target/classes:lib/* WebCalculator"
-' > railway.toml

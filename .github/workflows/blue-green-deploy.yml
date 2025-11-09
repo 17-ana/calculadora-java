@@ -10,6 +10,17 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Verify project structure
+      run: |
+        echo "=== Estructura del proyecto ==="
+        ls -la
+        echo "=== Contenido de railway.toml ==="
+        cat railway.toml
+        echo "=== Archivos en src/ ==="
+        ls -la src/
+        echo "=== Archivos en lib/ ==="
+        ls -la lib/
+    
     - name: Install Railway CLI
       run: npm install -g @railway/cli
     
