@@ -1,0 +1,24 @@
+name: Deploy Only to Railway - Blue Green
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy-to-green:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build application
+      run: |
+        mkdir -p target/classes
+        javac -cp "lib/*" -d target/classes src/*.java
+        echo "✅ Aplicación compilada exitosamente"
+    
+    - name: Deploy to Green Environment
+      uses: railway-org/railway-action@v1
+      with:
+        token: ${{ secrets.RAILWAY_TOKEN }}
+        environment: production
+        service: calculadora-green
