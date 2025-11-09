@@ -1,4 +1,4 @@
-¿name: Blue-Green Deployment
+name: Blue-Green Deployment
 
 on:
   push:
@@ -38,13 +38,9 @@ jobs:
         echo '' >> railway.toml
         echo '[deploy]' >> railway.toml
         echo 'numReplicas = 1' >> railway.toml
-        cat railway.toml
     
     - name: Install Railway CLI
       run: npm install -g @railway/cli
-    
-    - name: Debug - Check Railway CLI installation
-      run: railway --version
     
     - name: Deploy to Green Project
       run: railway deploy
