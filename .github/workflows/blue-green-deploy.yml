@@ -1,4 +1,4 @@
-name: Blue-Green Deployment
+¿name: Blue-Green Deployment
 
 on:
   push:
@@ -47,7 +47,7 @@ jobs:
       run: railway --version
     
     - name: Deploy to Green Project
-      run: railway deploy --detach
+      run: railway deploy
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_GREEN }}
 
@@ -80,6 +80,6 @@ jobs:
       run: npm install -g @railway/cli
     
     - name: Deploy to Blue Project
-      run: railway deploy --detach
+      run: railway deploy
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_BLUE }}
