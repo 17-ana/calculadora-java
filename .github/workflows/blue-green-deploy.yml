@@ -10,6 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Setup Java 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+    
     - name: Debug - Show current directory
       run: pwd && ls -la
     
@@ -23,6 +29,16 @@ jobs:
       run: |
         mkdir -p target/classes
         javac -cp "lib/*" -d target/classes src/*.java
+        echo "✅ Build completado"
+    
+    - name: Create railway config
+      run: |
+        echo '[build]' > railway.toml
+        echo 'builder = "nixpacks"' >> railway.toml
+        echo '' >> railway.toml
+        echo '[deploy]' >> railway.toml
+        echo 'numReplicas = 1' >> railway.toml
+        cat railway.toml
     
     - name: Install Railway CLI
       run: npm install -g @railway/cli
@@ -31,7 +47,7 @@ jobs:
       run: railway --version
     
     - name: Deploy to Green Project
-      run: railway deploy
+      run: railway deploy --detach
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_GREEN }}
 
@@ -40,15 +56,30 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Setup Java 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+    
     - name: Build application
       run: |
         mkdir -p target/classes
         javac -cp "lib/*" -d target/classes src/*.java
+        echo "✅ Build completado"
+    
+    - name: Create railway config
+      run: |
+        echo '[build]' > railway.toml
+        echo 'builder = "nixpacks"' >> railway.toml
+        echo '' >> railway.toml
+        echo '[deploy]' >> railway.toml
+        echo 'numReplicas = 1' >> railway.toml
     
     - name: Install Railway CLI
       run: npm install -g @railway/cli
     
     - name: Deploy to Blue Project
-      run: railway deploy
+      run: railway deploy --detach
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_BLUE }}

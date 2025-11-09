@@ -1,11 +1,11 @@
-name: Deploy Only to Railway - Blue Green
+name: Deploy to Railway Green
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  deploy-to-green:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -14,11 +14,11 @@ jobs:
       run: |
         mkdir -p target/classes
         javac -cp "lib/*" -d target/classes src/*.java
-        echo "✅ Aplicación compilada exitosamente"
     
-    - name: Deploy to Green Environment
-      uses: creyD/railway-deploy@v1.1.0
-      with:
-        token: ${{ secrets.RAILWAY_TOKEN }}
-        environment: production
-        service: calculadora-green
+    - name: Install Railway CLI
+      run: npm install -g @railway/cli
+    
+    - name: Deploy to Green
+      run: railway deploy --service calculadora-green
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
