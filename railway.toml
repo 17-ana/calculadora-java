@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "mkdir -p target/classes && javac -cp \"lib/*\" -d target/classes src/*.java"
+buildCommand = "mkdir -p target/classes && javac -cp 'lib/*' -d target/classes src/*.java"
 
 [deploy]
 startCommand = "java -cp target/classes:lib/* WebCalculator"
@@ -9,3 +9,4 @@ numReplicas = 1
 [[services]]
 name = "web"
 run = "java -cp target/classes:lib/* WebCalculator"
+port = 4567
