@@ -17,7 +17,7 @@ jobs:
         echo "✅ Aplicación compilada exitosamente"
     
     - name: Deploy to Green Environment
-      uses: railwayapp/railway-action@v1
+      uses: creyD/railway-deploy@v1.1.0
       with:
         token: ${{ secrets.RAILWAY_TOKEN }}
         environment: production
