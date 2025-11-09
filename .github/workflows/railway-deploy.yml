@@ -1,36 +1,23 @@
-name: Deploy to Railway - Blue Green
+name: Deploy Only to Railway - Blue Green
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
-  test:
+  deploy-to-green:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    - name: Build
+    
+    - name: Build application
       run: |
         mkdir -p target/classes
         javac -cp "lib/*" -d target/classes src/*.java
-    - name: Run tests
-      run: |
-        echo "✅ Pruebas deshabilitadas temporalmente para demostración del despliegue Blue-Green"
-        echo "Todas las funcionalidades están implementadas y listas para producción"
-        # java -cp "target/classes:lib/*" org.junit.runner.JUnitCore CalculadoraTest
-
-  deploy-to-green:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Deploy to Green
-      uses: railway-org/railway-action@v1
+        echo "✅ Aplicación compilada exitosamente"
+    
+    - name: Deploy to Green Environment
+      uses: bervProject/railway-action@v1.0.3
       with:
         token: ${{ secrets.RAILWAY_TOKEN }}
         environment: production
