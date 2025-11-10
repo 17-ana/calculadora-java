@@ -73,6 +73,6 @@ public class WebCalculator {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
-        return 4567;
+        return 8080;  // ← Cambiar de 4567 a 8080 (fallback para desarrollo)
     }
 }
