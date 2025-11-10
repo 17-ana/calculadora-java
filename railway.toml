@@ -2,12 +2,12 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "java -cp target/classes:lib/* WebCalculator"
+startCommand = "mvn compile exec:java -Dexec.mainClass=\"WebCalculator\""
 numReplicas = 1
 
 [[services]]
 name = "web"
-run = "java -cp target/classes:lib/* WebCalculator"
+run = "mvn compile exec:java -Dexec.mainClass=\"WebCalculator\""
 port = 4567
 
 [variables]
