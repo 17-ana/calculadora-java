@@ -1,9 +1,5 @@
 [build]
 builder = "nixpacks"
-buildCommand = "apt-get update && apt-get install -y openjdk-21-jdk && mkdir -p target/classes && javac -cp 'lib/*' -d target/classes src/*.java"
-
-[nixpacks]
-config = { JAVA_VERSION = "21" }
 
 [deploy]
 startCommand = "java -cp target/classes:lib/* WebCalculator"
@@ -13,3 +9,6 @@ numReplicas = 1
 name = "web"
 run = "java -cp target/classes:lib/* WebCalculator"
 port = 4567
+
+[variables]
+PORT = "4567"
